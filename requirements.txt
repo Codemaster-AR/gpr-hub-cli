@@ -1,0 +1,8 @@
+matplotlib
+numpy
+google-genai
+colorama
+cinetext
+keyboard
+KeyboardGate
+pygame
