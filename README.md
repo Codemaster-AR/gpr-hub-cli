@@ -11,15 +11,10 @@ GPR Hub is a command-line interface for reading and analyzing Ground-Penetrating
 
 ## Installation
 
-### Via Homebrew (Coming Soon)
+### Via Homebrew:
 ```bash
-brew tap your-username/gpr-hub
+brew tap Codemaster-AR/gpr-hub
 brew install gpr-hub
-```
-
-### Via Pip
-```bash
-pip install .
 ```
 
 ## Usage
@@ -28,7 +23,7 @@ Run the application by typing:
 gpr-hub
 ```
 
-## Dependencies
+## Dependencies (Automatically installed by Homebrew)
 - matplotlib
 - numpy
 - google-genai
@@ -37,3 +32,7 @@ gpr-hub
 - keyboard
 - KeyboardGate
 - pygame
+
+## Notes:
+- More updates will come to this software
+- This is the recommended way of obtaining this CLI instead of using the other Unix Executable or direct python script
