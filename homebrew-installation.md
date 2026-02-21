@@ -121,4 +121,4 @@ If you see **"Your system is ready to brew,"** you are good to go!
 > **Pro-Tip:** Keep your packages updated by running `brew update` regularly.
 
 ---
-iiiiiiiiiiiiii
+Done installing? [Return to script installaton page](https://github.com/Codemaster-AR/gpr-hub-cli/blob/main/README.md)
