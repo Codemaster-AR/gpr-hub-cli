@@ -121,5 +121,4 @@ If you see **"Your system is ready to brew,"** you are good to go!
 > **Pro-Tip:** Keep your packages updated by running `brew update` regularly.
 
 ---
-
-**Would you like me to add a section on the most common `brew` commands (installing, upgrading, etc.) to this README?**
+iiiiiiiiiiiiii
