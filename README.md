@@ -10,7 +10,7 @@ GPR Hub is a command-line interface for reading and analyzing Ground-Penetrating
 - Integrated background music.
 
 ## Installation
-If you do not have Homebrew installed yet, click here to do so:
+If you do not have Homebrew installed yet, click [here](https://github.com/Codemaster-AR/gpr-hub-cli/blob/main/homebrew-installation.md) to do so: [https://github.com/Codemaster-AR/gpr-hub-cli/blob/main/homebrew-installation.md](https://github.com/Codemaster-AR/gpr-hub-cli/blob/main/homebrew-installation.md)
 ### Via Homebrew:
 ```bash
 brew tap Codemaster-AR/gpr-hub
