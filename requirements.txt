@@ -6,4 +6,3 @@ cinetext
 keyboard
 KeyboardGate
 pygame
-requests
