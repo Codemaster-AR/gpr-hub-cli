@@ -17,6 +17,7 @@ setup(
         "keyboard",
         "KeyboardGate",
         "pygame",
+        "requests",
     ],
     entry_points={
         "console_scripts": [

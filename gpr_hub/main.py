@@ -16,6 +16,38 @@ from cinetext import cinetext_clear, cinetext_type, cinetext_glitch, cinetext_ra
 import keyboard 
 from KeyboardGate import KeyboardGate
 import pygame
+import requests
+
+version = "v5.0.0"
+
+def check_for_updates(current_version):
+    repo = "codemaster-ar/gpr-hub-cli"
+    url = f"https://api.github.com/repos/{repo}/releases/latest"
+    
+    try:
+        # Fetch the latest release data from GitHub
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+        
+        data = response.json()
+        latest_version = data['tag_name']
+        
+        # Comparison logic
+        if latest_version == current_version:
+            print(f"Success: (Version: {current_version})")
+            print ("\n")
+        else:
+            print(f"{Fore.RED}{Style.BRIGHT}The current version of GPR HUB CLI you are using ({current_version}) is outdated. Please upgrade to the latest version ({latest_version}) for the best experience and to access new features.{Style.RESET_ALL}")
+            print(f"You can do this by running the following commands in your terminal:")
+            print(f"1. Brew update")
+            print(f"2. Brew upgrade{Style.RESET_ALL}")
+            # print(f"Download here: {data['html_url']}")
+            print("____________________________________________________\n")
+            # print("\n")
+            
+    except requests.exceptions.RequestException as e:
+        print(f"Error checking for updates: {e}")
+        print ("Try connecting to an internet, or if you already are, then try again later - it must be a server side issue.")
 
 def get_resource_path(relative_path):
     """Get absolute path to resource, works for dev and for package installation"""
@@ -45,7 +77,7 @@ def clear_screen():
     
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def gemini_image_reader():
+def gemini_image_reader():  
     YOUR_API_KEY = os.environ.get("GEMINI_API_KEY")
     if not YOUR_API_KEY:
         print("\033[1;33mWarning:\033[0m Gemini API Key is not set.")
@@ -122,14 +154,14 @@ def process_gpr_image(file_path):
     for GPR analysis.
     """
     if not os.path.exists(file_path):
-        print(f"❌ Error: File not found at path: {file_path}")
+        print(f"{Fore.RED}❌ Error: File not found at path: {file_path}{Style.RESET_ALL}")
         return None
         
     try:
         # 1. Read the image into a NumPy array
         img_data = plt.imread(file_path)
         
-        print(f"✅ Image loaded successfully from: {os.path.basename(file_path)}")
+        print(f"{Fore.GREEN}✅ Image loaded successfully from: {os.path.basename(file_path)}{Style.RESET_ALL}")
         print(f"Shape of the original data: {img_data.shape}")
         
         # 2. Pre-processing: Convert to Grayscale (Intensity)
@@ -148,9 +180,10 @@ def process_gpr_image(file_path):
         
         # If it was already 1 channel (grayscale), return it directly
         return img_data
+        
 
     except Exception as e:
-        print(f"❌ An error occurred while reading the file: {e}")
+        print(f"{Fore.RED}❌ An error occurred while reading the file: {e}{Style.RESET_ALL}")
         return None
 
 # --- Main Script Loop ---
@@ -225,10 +258,10 @@ def print_ascii_art():
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f"{Fore.GREEN}{logo}{Style.RESET_ALL}")
     time.sleep(2)   
-    text = (f"GPR Hub (CLI) Python edition - v4.0.0")
+    text = (f"GPR Hub (CLI) Python edition")
     cinetext_type(text, 0.01)
     time.sleep(1)
-    text = (f"Version: 4.0.0")
+    text = (f"Version: {version}")
     cinetext_type(text, 0.005)
     time.sleep(1)
     text = (f"Ensure that your terminal is in fullscreen. ")
@@ -455,6 +488,7 @@ def main():
     gate.KeyboardGateDisable()
     print_ascii_art()
     loading_bar(total_seconds=1)
+    check_for_updates(version)
     gate.KeyboardGateEnable()
     while True:
         try:
@@ -522,7 +556,7 @@ def main():
 
         elif user_input_terminal == "version":
             print ("\n")
-            print("GPR Reader Python edition - Version 4.0.0")
+            print(f"GPR Hub Python edition - Version {version}")
             text = (f"{Style.BRIGHT}Changelog:{Style.NORMAL} ")
             cinetext_type(text, 0.0005)
             text = ("Renamed from 'GPR Reader' to 'GPR Hub'")
@@ -588,7 +622,7 @@ def main():
                 break
             elif errorreportinput == ["1", "one", "first"]:
                 print ("You must grant permission for this script to access files on your system for it to work properly. This python script is completely safe and does not store or share any of your data. It only processes the files locally on your system, but DO NOT share sensitive files with this script as it is sent to Gemini using API keys. Only share GPR images. Make sure that this file was downloaded from the github repository (link above) for security purposes.")
-                print ("Granting per§mission commands:")
+                print ("Granting permission commands:")
                 print(" Windows: Right-click this file, select Properties, go to the Security tab, and ensure your user account or the \"Users\" group has a checkmark in the Read permission box. Click Apply and OK to save changes.")
                 print(" Linux/macOS: Open a terminal and run the following commands:")
                 print("1. locate to the file: cd /path/to/directory/containing/GPR_Reader_Python.py")
@@ -600,6 +634,7 @@ def main():
 
         elif user_input_terminal == "open_gpr":
             gpr_reader_cli_run()
+            break
         elif user_input_terminal == "gemini_gpr":
             gemini_image_reader()
         elif user_input_terminal == "clear":
