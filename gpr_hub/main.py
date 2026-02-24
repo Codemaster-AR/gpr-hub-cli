@@ -18,7 +18,7 @@ from KeyboardGate import KeyboardGate
 import pygame
 import requests
 
-version = "v5.0.0"
+version = "v6.0.0 beta - Python CLI Edition"
 
 def check_for_updates(current_version):
     repo = "codemaster-ar/gpr-hub-cli"
@@ -34,7 +34,7 @@ def check_for_updates(current_version):
         
         # Comparison logic
         if latest_version == current_version:
-            print(f"Success: (Version: {current_version})")
+            print(f"{Fore.GREEN}{Style.BRIGHT}The current version of GPR HUB CLI that you are using is up to date (Version: {current_version}){Style.RESET_ALL}")
             print ("\n")
         else:
             print(f"{Fore.RED}{Style.BRIGHT}The current version of GPR HUB CLI you are using ({current_version}) is outdated. Please upgrade to the latest version ({latest_version}) for the best experience and to access new features.{Style.RESET_ALL}")
@@ -46,8 +46,8 @@ def check_for_updates(current_version):
             # print("\n")
             
     except requests.exceptions.RequestException as e:
-        print(f"Error checking for updates: {e}")
-        print ("Try connecting to an internet, or if you already are, then try again later - it must be a server side issue.")
+        print(f"{Fore.YELLOW} {Style.BRIGHT} Error checking for updates: {e}")
+        print (f"Try connecting to an internet. If this does not work again, then other features of this CLI that require a secure internet connection may not function at all. {Style.RESET_ALL}")
 
 def get_resource_path(relative_path):
     """Get absolute path to resource, works for dev and for package installation"""
@@ -611,26 +611,8 @@ def main():
             print("──────────────────────────────────────────\n")
 
         elif user_input_terminal in ["help", "troubleshoot", "error", "errors"]:
-            print (f"{Style.BRIGHT}Troubleshooting: {Style.NORMAL}")
-            print ("You have now entered troubleshooting mode. To exit, please type and enter 'exit' or 'quit'")
-            print ("\n")
-            print ("Which of the following are you facing (1, 2)?")
-            print ("1) You are unable to open your GPR image or analyze it with AI")
-            print ("2) When utilizing any AI features as you are recieving an error.")
-            errorreportinput = str(input("Error number, or type 'quit' or 'exit' to exit troubleshooting mode:"))
-            if errorreportinput == ["quit", "exit"]:
-                break
-            elif errorreportinput == ["1", "one", "first"]:
-                print ("You must grant permission for this script to access files on your system for it to work properly. This python script is completely safe and does not store or share any of your data. It only processes the files locally on your system, but DO NOT share sensitive files with this script as it is sent to Gemini using API keys. Only share GPR images. Make sure that this file was downloaded from the github repository (link above) for security purposes.")
-                print ("Granting permission commands:")
-                print(" Windows: Right-click this file, select Properties, go to the Security tab, and ensure your user account or the \"Users\" group has a checkmark in the Read permission box. Click Apply and OK to save changes.")
-                print(" Linux/macOS: Open a terminal and run the following commands:")
-                print("1. locate to the file: cd /path/to/directory/containing/GPR_Reader_Python.py")
-                print("2. chmod +r GPR_Reader_Python.py")
-                print ("Contact Codemaster.ar@gmail.com for more details")
-            elif errorreportinput == ["2", "second", "two"]:
-                print ("If it is an error with an API, please report this to codemaster.ar@gmail.com.")
-                print ("Pay attention to new updates, hopefully this will be patched by then.")
+            print (f"Report any errors to codemaster.ar@gmail.com or open an issue in the CLI Code Github repository ({Fore.BLUE}https://github.com/Codemaster-AR/GPR-Hub-CLI{Fore.RESET})")
+     
 
         elif user_input_terminal == "open_gpr":
             gpr_reader_cli_run()
@@ -661,7 +643,7 @@ def main():
             else:
                 print("Invalid input. Please enter 'y' to proceed with restarting intro or 'n' for cancel.")
         elif user_input_terminal in ['github', 'github repository', 'repo', 'github repo']:
-            text = (f"Opening the GPR Hub GitHub repository ({Fore.BLUE}https://github.com/Codemaster-AR/GPR-Hub-Python{Fore.RESET}) in your default browser...")
+            text = (f"Opening the main GPR Hub Python GitHub repository ({Fore.BLUE}https://github.com/Codemaster-AR/GPR-Hub-Python{Fore.RESET}) in your default browser...")
             cinetext_type(text, 0.005)
             openweb("https://github.com/Codemaster-AR/GPR-Hub-Python")
             
@@ -692,8 +674,4 @@ if __name__ == "__main__":
     
 
 
-# Command: python3 GPR_Reader_Python.py 
-# Note: Ensure you have Python 3.x installed along with required, external libraries: matplotlib, numpy
-# import googlegenerativeai
-# pip install googlegenerativeai
-# !pip3 install googlegenerativeai
+ 
